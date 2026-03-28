@@ -1,0 +1,111 @@
+/* Dark Theme Overrides for PayrollPH Enterprise */
+
+/* Global Dark Theme Variables */
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-card: #141414;
+    --bg-hover: #2a2a2a;
+    --border-color: #2a2a2a;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+}
+
+/* Override body background */
+body {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Sidebar dark theme */
+.sidebar.advanced {
+    background: var(--bg-secondary) !important;
+    border-right-color: var(--border-color) !important;
+}
+
+.sidebar-header {
+    border-bottom-color: var(--border-color) !important;
+}
+
+/* Top Navigation dark theme */
+.top-nav {
+    background: #151515 !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Cards and containers */
+.dashboard-card,
+.stat-card,
+.card {
+    background: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Tables */
+.data-table {
+    background: var(--bg-card) !important;
+}
+
+.data-table th {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.data-table td {
+    border-color: var(--border-color) !important;
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Input fields */
+input, select, textarea {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Buttons */
+.btn-secondary {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Global search */
+.global-search {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.global-search input {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+}
+
+/* Notifications dropdown */
+.notifications-menu {
+    background: var(--bg-secondary) !important;
+}
+
+.notification-item {
+    border-bottom-color: var(--border-color) !important;
+}
+
+/* Quick stats in sidebar */
+.stat-item {
+    background: var(--bg-card) !important;
+}
+
+/* Remove any remaining white backgrounds */
+* {
+    background-color: inherit;
+}
+
+/* Fix any contrast issues */
+.text-muted {
+    color: var(--text-secondary) !important;
+}

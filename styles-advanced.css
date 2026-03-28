@@ -58,8 +58,8 @@
 
 body {
     font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    background: var(--gray-50);
-    color: var(--gray-900);
+    background: #0a0a0a;
+    color: #f1f5f9;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -82,7 +82,7 @@ body::before {
 }
 
 /* Top Navigation */
-.top-nav {
+.top-nav { background: #151515;
     position: fixed;
     top: 0;
     left: 0;
@@ -146,7 +146,7 @@ body::before {
 }
 
 .breadcrumb-current {
-    color: var(--gray-900);
+    color: #f1f5f9;
     font-weight: 500;
 }
 
@@ -167,7 +167,7 @@ body::before {
 }
 
 .global-search input:focus {
-    background: white;
+    background: #1a1a1a;
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(94, 91, 255, 0.1);
     outline: none;
@@ -210,7 +210,7 @@ body::before {
     cursor: pointer;
     transition: all 0.2s;
     font-size: 20px;
-    color: var(--gray-700);
+    color: #cbd5e1;
     position: relative;
 }
 
@@ -291,7 +291,7 @@ body::before {
 /* Advanced Sidebar */
 .sidebar.advanced {
     width: 280px;
-    background: white;
+    background: #1a1a1a;
     height: calc(100vh - 65px);
     position: fixed;
     left: 0;
@@ -331,7 +331,7 @@ body::before {
 .logo-text h2 {
     font-size: 20px;
     font-weight: 800;
-    color: var(--gray-900);
+    color: #f1f5f9;
     line-height: 1;
 }
 
@@ -353,7 +353,7 @@ body::before {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     padding: 1rem;
-    background: var(--gray-50);
+    background: #141414;
     border-bottom: 1px solid var(--gray-200);
 }
 
@@ -410,7 +410,7 @@ body::before {
     display: flex;
     align-items: center;
     padding: 0.75rem 1.5rem;
-    color: var(--gray-700);
+    color: #cbd5e1;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
@@ -420,7 +420,7 @@ body::before {
 
 .nav-link:hover {
     color: var(--primary);
-    background: var(--gray-50);
+    background: #141414;
 }
 
 .nav-item.active .nav-link {
@@ -505,14 +505,14 @@ body::before {
 .sidebar-footer {
     padding: 1rem;
     border-top: 1px solid var(--gray-200);
-    background: var(--gray-50);
+    background: #141414;
 }
 
 .storage-info {
     padding: 1rem;
-    background: white;
+    background: #1a1a1a;
     border-radius: 10px;
-    border: 1px solid var(--gray-200);
+    border: 1px solid #2a2a2a;
 }
 
 .storage-header {
@@ -521,7 +521,7 @@ body::before {
     gap: 0.5rem;
     font-size: 13px;
     font-weight: 600;
-    color: var(--gray-700);
+    color: #cbd5e1;
     margin-bottom: 0.75rem;
 }
 
@@ -549,12 +549,12 @@ body::before {
     flex: 1;
     margin-left: 280px;
     min-height: calc(100vh - 65px);
-    background: var(--gray-50);
+    background: #141414;
 }
 
 /* Page Header Advanced */
 .page-header-advanced {
-    background: white;
+    background: #1a1a1a;
     border-bottom: 1px solid var(--gray-200);
     padding: 1.5rem 2rem;
 }
@@ -569,7 +569,7 @@ body::before {
 .page-title {
     font-size: 24px;
     font-weight: 700;
-    color: var(--gray-900);
+    color: #f1f5f9;
     margin-bottom: 0.25rem;
 }
 
@@ -590,11 +590,11 @@ body::before {
     align-items: center;
     gap: 0.5rem;
     padding: 0.625rem 1rem;
-    background: white;
+    background: #1a1a1a;
     border: 1px solid var(--gray-300);
     border-radius: 8px;
     font-size: 14px;
-    color: var(--gray-700);
+    color: #cbd5e1;
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -630,9 +630,9 @@ body::before {
 }
 
 .btn-outline {
-    background: white;
+    background: #1a1a1a;
     border: 1px solid var(--gray-300);
-    color: var(--gray-700);
+    color: #cbd5e1;
 }
 
 .btn-outline:hover {
@@ -652,11 +652,11 @@ body::before {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.25rem;
-    background: var(--gray-50);
-    border: 1px solid var(--gray-200);
+    background: #141414;
+    border: 1px solid #2a2a2a;
     border-radius: 8px;
     font-size: 14px;
-    color: var(--gray-700);
+    color: #cbd5e1;
     white-space: nowrap;
     cursor: pointer;
     transition: all 0.2s;
@@ -687,13 +687,13 @@ body::before {
 }
 
 .metric-card {
-    background: white;
+    background: #1a1a1a;
     border-radius: 16px;
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
     transition: all 0.3s;
-    border: 1px solid var(--gray-200);
+    border: 1px solid #2a2a2a;
 }
 
 .metric-card:hover {
@@ -754,7 +754,7 @@ body::before {
 .metric-value {
     font-size: 28px;
     font-weight: 700;
-    color: var(--gray-900);
+    color: #f1f5f9;
     line-height: 1;
     margin-bottom: 0.5rem;
 }
@@ -803,10 +803,10 @@ body::before {
 }
 
 .chart-card {
-    background: white;
+    background: #1a1a1a;
     border-radius: 16px;
     padding: 1.5rem;
-    border: 1px solid var(--gray-200);
+    border: 1px solid #2a2a2a;
 }
 
 .chart-header {
@@ -816,7 +816,7 @@ body::before {
 .chart-title h3 {
     font-size: 18px;
     font-weight: 600;
-    color: var(--gray-900);
+    color: #f1f5f9;
     margin-bottom: 0.25rem;
 }
 
@@ -860,7 +860,7 @@ body::before {
     border: 1px solid var(--gray-300);
     border-radius: 6px;
     font-size: 13px;
-    background: white;
+    background: #1a1a1a;
     cursor: pointer;
 }
 
@@ -872,10 +872,10 @@ body::before {
 }
 
 .table-card {
-    background: white;
+    background: #1a1a1a;
     border-radius: 16px;
     padding: 1.5rem;
-    border: 1px solid var(--gray-200);
+    border: 1px solid #2a2a2a;
 }
 
 .table-header {
@@ -888,7 +888,7 @@ body::before {
 .table-header h3 {
     font-size: 18px;
     font-weight: 600;
-    color: var(--gray-900);
+    color: #f1f5f9;
 }
 
 .btn-text {
@@ -919,7 +919,7 @@ body::before {
     color: var(--gray-600);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    background: var(--gray-50);
+    background: #141414;
 }
 
 .data-table.advanced td {
@@ -939,13 +939,13 @@ body::before {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: var(--gray-50);
+    background: #141414;
     border-radius: 12px;
     transition: all 0.2s;
 }
 
 .rank-item:hover {
-    background: white;
+    background: #1a1a1a;
     box-shadow: var(--shadow-md);
     transform: translateX(4px);
 }
@@ -982,7 +982,7 @@ body::before {
 .employee-details h4 {
     font-size: 14px;
     font-weight: 600;
-    color: var(--gray-900);
+    color: #f1f5f9;
 }
 
 .employee-details p {
@@ -1009,7 +1009,7 @@ body::before {
     display: block;
     font-size: 16px;
     font-weight: 600;
-    color: var(--gray-900);
+    color: #f1f5f9;
 }
 
 /* Command Palette */
@@ -1025,7 +1025,7 @@ body::before {
 .command-content {
     max-width: 640px;
     margin: 0 auto;
-    background: white;
+    background: #1a1a1a;
     border-radius: 16px;
     box-shadow: var(--shadow-2xl);
     overflow: hidden;
