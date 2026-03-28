@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayrollPH Pro — Modern Payroll System</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Modern Styles -->
+    <link rel="stylesheet" href="styles-modern.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Modern Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <div class="logo">
+                    <div class="logo-icon">P</div>
+                    <div class="logo-text">
+                        <h1>PayrollPH</h1>
+                        <p>Pro Version</p>
+                    </div>
+                </div>
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="ri-menu-fold-line"></i>
+                </button>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="nav">
+                <!-- Main Section -->
+                <div class="nav-section">
+                    <div class="nav-label">Main</div>
+                    <a href="#" class="nav-item active" data-page="dashboard">
+                        <i class="ri-dashboard-3-line nav-icon"></i>
+                        <span class="nav-text">Dashboard</span>
+                        <span class="nav-badge">New</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="employees">
+                        <i class="ri-team-line nav-icon"></i>
+                        <span class="nav-text">Employees</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="timesheet">
+                        <i class="ri-time-line nav-icon"></i>
+                        <span class="nav-text">Timesheet</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="payroll">
+                        <i class="ri-money-dollar-circle-line nav-icon"></i>
+                        <span class="nav-text">Run Payroll</span>
+                    </a>
+                </div>
+                
+                <!-- Reports Section -->
+                <div class="nav-section">
+                    <div class="nav-label">Reports</div>
+                    <a href="#" class="nav-item" data-page="reports">
+                        <i class="ri-bar-chart-box-line nav-icon"></i>
+                        <span class="nav-text">Analytics</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="compliance">
+                        <i class="ri-government-line nav-icon"></i>
+                        <span class="nav-text">Compliance</span>
+                    </a>
+                </div>
+                
+                <!-- Settings -->
+                <div class="nav-section">
+                    <div class="nav-label">Settings</div>
+                    <a href="#" class="nav-item" data-page="settings">
+                        <i class="ri-settings-4-line nav-icon"></i>
+                        <span class="nav-text">Settings</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="help">
+                        <i class="ri-question-line nav-icon"></i>
+                        <span class="nav-text">Help & Support</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <!-- User Section -->
+            <div class="sidebar-user">
+                <div class="user-info">
+                    <div class="user-avatar">GC</div>
+                    <div class="user-details">
+                        <h4>Gene Carlo</h4>
+                        <p>Administrator</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <section id="dashboard" class="page active">
+                <!-- Page Header -->
+                <header class="page-header">
+                    <div class="page-title">
+                        <h2>Dashboard</h2>
+                        <nav class="breadcrumb">
+                            <a href="#">PayrollPH</a>
+                            <span class="breadcrumb-separator">/</span>
+                            <span>Dashboard</span>
+                        </nav>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <i class="ri-search-line search-icon"></i>
+                            <input type="text" class="search-input" placeholder="Search anything...">
+                        </div>
+                        
+                        <button class="header-btn notification-btn">
+                            <i class="ri-notification-3-line"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        
+                        <button class="header-btn primary" onclick="showPage('payroll')">
+                            <i class="ri-play-circle-line"></i>
+                            <span>Run Payroll</span>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Dashboard Content -->
+                <div class="dashboard-content">
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-info">
+                                    <h3>Total Employees</h3>
+                                    <p class="stat-value" id="totalEmployees">0</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="ri-team-line"></i>
+                                </div>
+                            </div>
+                            <div class="stat-footer">
+                                <span class="stat-trend trend-up">
+                                    <i class="ri-arrow-up-line"></i>
+                                    12%
+                                </span>
+                                <span class="stat-period">vs last month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-info">
+                                    <h3>Total Payroll</h3>
+                                    <p class="stat-value" id="totalPayroll">₱0</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="ri-wallet-3-line"></i>
+                                </div>
+                            </div>
+                            <div class="stat-footer">
+                                <span class="stat-trend trend-up">
+                                    <i class="ri-arrow-up-line"></i>
+                                    8%
+                                </span>
+                                <span class="stat-period">vs last month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-info">
+                                    <h3>Deductions</h3>
+                                    <p class="stat-value" id="totalDeductions">₱0</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="ri-percent-line"></i>
+                                </div>
+                            </div>
+                            <div class="stat-footer">
+                                <span class="stat-trend trend-down">
+                                    <i class="ri-arrow-down-line"></i>
+                                    3%
+                                </span>
+                                <span class="stat-period">vs last month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-info">
+                                    <h3>Net Pay</h3>
+                                    <p class="stat-value" id="netPay">₱0</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="ri-money-dollar-circle-line"></i>
+                                </div>
+                            </div>
+                            <div class="stat-footer">
+                                <span class="stat-trend trend-up">
+                                    <i class="ri-arrow-up-line"></i>
+                                    15%
+                                </span>
+                                <span class="stat-period">vs last month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Grid -->
+                    <div class="content-grid">
+                        <!-- Chart Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="ri-line-chart-line icon"></i>
+                                    <h3>Payroll Trends</h3>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="btn-icon">
+                                        <i class="ri-more-2-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="payrollChart" height="300"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Recent Employees -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="ri-user-add-line icon"></i>
+                                    <h3>Recent Employees</h3>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="btn-icon" onclick="showPage('employees')">
+                                        <i class="ri-arrow-right-line"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="employee-list" id="recentEmployees">
+                                    <p class="empty-state">No employees added yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Employees Page -->
+            <section id="employees" class="page">
+                <!-- Page Header -->
+                <header class="page-header">
+                    <div class="page-title">
+                        <h2>Employees</h2>
+                        <nav class="breadcrumb">
+                            <a href="#">PayrollPH</a>
+                            <span class="breadcrumb-separator">/</span>
+                            <span>Employees</span>
+                        </nav>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            <i class="ri-download-2-line"></i>
+                            <span>Export</span>
+                        </button>
+                        
+                        <button class="header-btn primary" onclick="openAddEmployeeModal()">
+                            <i class="ri-user-add-line"></i>
+                            <span>Add Employee</span>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Employees Content -->
+                <div class="dashboard-content">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table class="modern-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Employee</th>
+                                            <th>ID</th>
+                                            <th>Department</th>
+                                            <th>Position</th>
+                                            <th>Salary</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="employeeTableBody">
+                                        <tr>
+                                            <td colspan="7" style="text-align: center; padding: 3rem;">
+                                                <div class="empty-state">
+                                                    <i class="ri-user-line" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+                                                    <p style="color: var(--text-muted);">No employees found. Add your first employee to get started.</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other pages will follow the same structure -->
+            
+        </main>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="openQuickAction()">
+        <i class="ri-add-line"></i>
+    </button>
+
+    <!-- Add Employee Modal -->
+    <div id="addEmployeeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Employee</h3>
+                <button class="modal-close" onclick="closeAddEmployeeModal()">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            
+            <form id="addEmployeeForm" class="modal-body">
+                <div class="form-grid">
+                    <div class="form-section">
+                        <h4>Personal Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Employee ID</label>
+                                <input type="text" name="employeeId" class="form-input" placeholder="EMP-001" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" name="fullName" class="form-input" placeholder="Juan Dela Cruz" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Employment Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Department</label>
+                                <select name="department" class="form-input" required>
+                                    <option value="">Select Department</option>
+                                    <option>Sales</option>
+                                    <option>Operations</option>
+                                    <option>Finance</option>
+                                    <option>HR</option>
+                                    <option>IT</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Position</label>
+                                <input type="text" name="position" class="form-input" placeholder="Sales Manager" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Monthly Salary (₱)</label>
+                                <input type="number" name="salary" class="form-input" placeholder="25000.00" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Employment Type</label>
+                                <select name="employmentType" class="form-input" required>
+                                    <option value="">Select Type</option>
+                                    <option>Regular</option>
+                                    <option>Probationary</option>
+                                    <option>Contractual</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Government IDs</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">SSS Number</label>
+                                <input type="text" name="sssNumber" class="form-input" placeholder="XX-XXXXXXX-X">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">PhilHealth Number</label>
+                                <input type="text" name="philhealthNumber" class="form-input" placeholder="XX-XXXXXXXXX-X">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Pag-IBIG Number</label>
+                                <input type="text" name="pagibigNumber" class="form-input" placeholder="XXXXXXXXXXXX">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">TIN</label>
+                                <input type="text" name="tin" class="form-input" placeholder="XXX-XXX-XXX-XXX">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeAddEmployeeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEmployee()">
+                    <i class="ri-save-line"></i>
+                    <span>Save Employee</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+        }
+
+        // Page Navigation
+        function showPage(pageName) {
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.page === pageName);
+            });
+            
+            // Update pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.toggle('active', page.id === pageName);
+            });
+        }
+
+        // Initialize navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = item.dataset.page;
+                showPage(page);
+            });
+        });
+
+        // Quick Action
+        function openQuickAction() {
+            openAddEmployeeModal();
+        }
+
+        // Modal Functions
+        function openAddEmployeeModal() {
+            document.getElementById('addEmployeeModal').classList.add('active');
+        }
+
+        function closeAddEmployeeModal() {
+            document.getElementById('addEmployeeModal').classList.remove('active');
+            document.getElementById('addEmployeeForm').reset();
+        }
+
+        // Save Employee
+        function saveEmployee() {
+            // Implementation
+            closeAddEmployeeModal();
+        }
+
+        // Initialize Charts
+        const ctx = document.getElementById('payrollChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Gross Pay',
+                        data: [450000, 460000, 455000, 470000, 480000, 485000],
+                        borderColor: '#5E5BFF',
+                        backgroundColor: 'rgba(94, 91, 255, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    }, {
+                        label: 'Net Pay',
+                        data: [380000, 390000, 385000, 395000, 405000, 410000],
+                        borderColor: '#00C48C',
+                        backgroundColor: 'rgba(0, 196, 140, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return '₱' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            width: 100%;
+            max-width: 720px;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-2xl);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.25rem;
+            color: var(--text-muted);
+        }
+
+        .modal-close:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            background: var(--bg-secondary);
+        }
+
+        .form-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayrollPH - Choose Your Version</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, #5E5BFF 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, #FF5E5B 0%, transparent 50%),
+                        radial-gradient(circle at 50% 100%, #00D4FF 0%, transparent 50%);
+            opacity: 0.3;
+            filter: blur(100px);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-20px, -20px) rotate(120deg); }
+            66% { transform: translate(20px, -10px) rotate(240deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #5E5BFF 0%, #00D4FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #888;
+        }
+
+        .versions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .version-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .version-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #5E5BFF, #00D4FF);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .version-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .version-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .version-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #5E5BFF 0%, #7875FF 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .version-card:nth-child(2) .version-icon {
+            background: linear-gradient(135deg, #00D4FF 0%, #0084FF 100%);
+        }
+
+        .version-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .version-desc {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .feature-icon {
+            color: #00C48C;
+        }
+
+        .launch-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #5E5BFF 0%, #7875FF 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(94, 91, 255, 0.5);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00D4FF;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .versions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">PayrollPH</h1>
+            <p class="subtitle">Choose your preferred interface</p>
+        </header>
+
+        <div class="versions">
+            <!-- Current Version -->
+            <div class="version-card" onclick="window.location.href='index.html'">
+                <div class="badge">Current Version</div>
+                <div class="version-icon">📊</div>
+                <h2 class="version-title">PayrollPH Classic</h2>
+                <p class="version-desc">
+                    The current production-ready payroll system with a modern purple theme, 
+                    comprehensive features, and proven reliability.
+                </p>
+                <div class="features">
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Dark mode support</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Dashboard analytics</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Full compliance features</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Responsive design</span>
+                    </div>
+                </div>
+                <button class="launch-btn">Launch Classic Version</button>
+            </div>
+
+            <!-- Ultra Modern Version -->
+            <div class="version-card" onclick="window.location.href='index-modern.html'">
+                <div class="badge" style="background: rgba(94, 91, 255, 0.2); color: #5E5BFF;">New Design</div>
+                <div class="version-icon">✨</div>
+                <h2 class="version-title">PayrollPH Ultra</h2>
+                <p class="version-desc">
+                    A completely redesigned interface with cutting-edge UI patterns, 
+                    enhanced sidebar navigation, and premium aesthetics.
+                </p>
+                <div class="features">
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Collapsible sidebar</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Floating action button</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Enhanced animations</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">✓</span>
+                        <span>Premium UI components</span>
+                    </div>
+                </div>
+                <button class="launch-btn" style="background: linear-gradient(135deg, #00D4FF 0%, #0084FF 100%);">
+                    Launch Ultra Version
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
