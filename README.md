@@ -1,6 +1,16 @@
 # PayrollPH - Philippine Payroll System
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Version-2.0-blue.svg" />
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" />
+  <img src="https://img.shields.io/badge/Status-Live-success.svg" />
+</p>
+
 A modern, web-based payroll system designed specifically for Philippine businesses, with full compliance for SSS, PhilHealth, Pag-IBIG, and BIR tax calculations.
+
+## 🌐 Live Demo
+
+**Try it now:** [https://payrollph.vercel.app](https://payrollph.vercel.app)
 
 ## 🚀 Features
 
@@ -9,7 +19,8 @@ A modern, web-based payroll system designed specifically for Philippine business
 - **Timesheet Tracking**: Track regular hours, overtime, holidays, and leave
 - **Automated Calculations**: Philippine-compliant deductions and taxes
 - **Payslip Generation**: Professional payslips for distribution
-- **Dashboard Analytics**: Real-time payroll insights
+- **Dashboard Analytics**: Real-time payroll insights with charts
+- **Dark Mode**: Modern UI with light/dark theme support
 
 ### Philippine Compliance
 - **SSS Contributions**: Updated 2026 contribution tables
@@ -21,30 +32,38 @@ A modern, web-based payroll system designed specifically for Philippine business
 ## 💻 Technology
 
 - **Frontend**: Pure HTML5, CSS3, JavaScript (no dependencies!)
+- **Charts**: Chart.js for data visualization
+- **Icons**: Remix Icon for modern UI
 - **Storage**: LocalStorage for data persistence
 - **Design**: Modern, responsive UI with Inter font
 - **Architecture**: Single-page application (SPA)
 
 ## 🎯 Quick Start
 
-### Option 1: Local Server
+### Option 1: Use Online (Recommended)
+Visit [https://payrollph.vercel.app](https://payrollph.vercel.app)
+
+### Option 2: Local Development
 ```bash
-cd philippine-payroll
+# Clone the repository
+git clone https://github.com/notanotherpeter-a11y/payrollph-system.git
+cd payrollph-system
+
+# Run local server
 python3 -m http.server 8080
 # Visit http://localhost:8080
 ```
 
-### Option 2: Deploy to Vercel
+### Option 3: Deploy Your Own
 ```bash
-# Install Vercel CLI
-npm i -g vercel
+# Using Vercel
+npx vercel
 
-# Deploy
-vercel --prod
+# Using Netlify
+npx netlify deploy
+
+# Or upload to any static host
 ```
-
-### Option 3: Static Hosting
-Upload all files to any static host (Netlify, GitHub Pages, etc.)
 
 ## 📊 Usage Guide
 
@@ -142,18 +161,46 @@ Current version uses browser LocalStorage. For production:
 - [ ] 13th month automation
 - [ ] Government report generation
 - [ ] Mobile app version
+- [ ] Time clock integration
+- [ ] Biometric attendance
+- [ ] Employee self-service portal
+
+## 🛠️ Development
+
+### Project Structure
+```
+payrollph-system/
+├── index.html        # Main HTML file
+├── styles.css        # Modern UI styles
+├── app.js           # Core JavaScript logic
+├── README.md        # Documentation
+├── package.json     # Project metadata
+└── vercel.json      # Vercel configuration
+```
+
+### Contributing
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 📞 Support
 
 For custom features or enterprise deployment:
-- Contact: Gene Carlo Gallardo
-- Portfolio: gene-carlo.com
-- Specialization: Philippine business solutions
+- **Developer**: Gene Carlo Gallardo
+- **Portfolio**: [gene-carlo.com](https://gene-carlo.com)
+- **GitHub**: [@notanotherpeter-a11y](https://github.com/notanotherpeter-a11y)
+- **Specialization**: Philippine business solutions
+
+## 🏆 Credits
+
+Built with ❤️ for Philippine businesses by Gene Carlo Gallardo
 
 ## 📜 License
 
-This is a demo version. For commercial use, please contact for licensing.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
-**Built with ❤️ for Philippine businesses**
+**⭐ Star this repository if you find it helpful!**
