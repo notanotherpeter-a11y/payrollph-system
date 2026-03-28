@@ -12,6 +12,11 @@ A modern, web-based payroll system designed specifically for Philippine business
 
 **Try it now:** [https://payrollph.vercel.app](https://payrollph.vercel.app)
 
+### 🎨 Choose Your Interface
+- **Classic Version:** [/index.html](https://payrollph.vercel.app/index.html) - Current production UI
+- **Ultra Modern Version:** [/index-modern.html](https://payrollph.vercel.app/index-modern.html) - New premium design
+- **Version Selector:** [/switcher.html](https://payrollph.vercel.app/switcher.html) - Compare both versions
+
 ## 🚀 Features
 
 ### Core Functionality
