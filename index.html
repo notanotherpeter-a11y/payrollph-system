@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayrollPH — Modern Philippine Payroll System</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Chart.js for Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>PayrollPH</h1>
+                <span class="version">PRO v2.0</span>
+            </div>
+            
+            <nav class="nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="ri-dashboard-3-line icon"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="employees">
+                    <i class="ri-group-line icon"></i>
+                    <span>Employees</span>
+                </a>
+                <a href="#" class="nav-item" data-page="timesheet">
+                    <i class="ri-time-line icon"></i>
+                    <span>Timesheet</span>
+                </a>
+                <a href="#" class="nav-item" data-page="payroll">
+                    <i class="ri-money-dollar-circle-line icon"></i>
+                    <span>Run Payroll</span>
+                </a>
+                <a href="#" class="nav-item" data-page="reports">
+                    <i class="ri-file-chart-line icon"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <i class="ri-settings-3-line icon"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="company-info">
+                    <p class="company-name">Demo Company Inc.</p>
+                    <p class="pay-period">March 2026 Period</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <header class="page-header">
+                    <h2>Dashboard Overview</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="toggleDarkMode()">
+                            <i class="ri-moon-line"></i>
+                            <span>Dark Mode</span>
+                        </button>
+                        <button class="btn btn-primary" onclick="navigateToPage('payroll')">
+                            <i class="ri-play-circle-line"></i>
+                            <span>Run Payroll</span>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="dashboard-grid">
+                    <!-- Stats Cards -->
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="ri-group-2-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Employees</h3>
+                            <p class="stat-value" id="totalEmployees">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="ri-wallet-3-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Payroll</h3>
+                            <p class="stat-value" id="totalPayroll">₱0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="ri-percent-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Deductions</h3>
+                            <p class="stat-value" id="totalDeductions">₱0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="ri-cash-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Net Pay</h3>
+                            <p class="stat-value" id="netPay">₱0.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="ri-bar-chart-2-line"></i> Payroll Trends</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="payrollChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="ri-pie-chart-2-line"></i> Department Distribution</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="departmentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="ri-history-line"></i> Recent Activity</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-list" id="recentActivity">
+                            <p class="empty-state">No recent activity. Start by adding employees!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employees Page -->
+            <div id="employees" class="page">
+                <header class="page-header">
+                    <h2>Employee Management</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="exportEmployees()">
+                            <i class="ri-download-2-line"></i>
+                            <span>Export</span>
+                        </button>
+                        <button class="btn btn-primary" onclick="openAddEmployeeModal()">
+                            <i class="ri-user-add-line"></i>
+                            <span>Add Employee</span>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="card">
+                    <div class="employee-filters">
+                        <div class="search-wrapper">
+                            <i class="ri-search-line search-icon"></i>
+                            <input type="text" class="search-input" placeholder="Search employees..." id="employeeSearch">
+                        </div>
+                        <select class="filter-select">
+                            <option>All Departments</option>
+                            <option>Sales</option>
+                            <option>Operations</option>
+                            <option>Admin</option>
+                            <option>IT</option>
+                            <option>HR</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                            <option>On Leave</option>
+                        </select>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Employee</th>
+                                    <th>Position</th>
+                                    <th>Department</th>
+                                    <th>Salary</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employeeTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-state">No employees found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timesheet Page -->
+            <div id="timesheet" class="page">
+                <header class="page-header">
+                    <h2>Timesheet Management</h2>
+                    <div class="header-actions">
+                        <select class="period-select">
+                            <option>March 1-15, 2026</option>
+                            <option>March 16-31, 2026</option>
+                            <option>February 16-28, 2026</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="saveTimesheet()">
+                            <i class="ri-save-line"></i>
+                            <span>Save Timesheet</span>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="timesheet-instructions">
+                    <p><i class="ri-information-line"></i> Enter work hours for each employee. Overtime and holiday rates are calculated automatically based on Philippine labor laws.</p>
+                </div>
+
+                <div class="card">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Regular (hrs)</th>
+                                    <th>Overtime</th>
+                                    <th>Holiday</th>
+                                    <th>Sick Leave</th>
+                                    <th>Vacation</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="timesheetTableBody">
+                                <tr>
+                                    <td colspan="7" class="empty-state">Add employees to manage timesheets</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer">
+                        <span class="timesheet-summary">
+                            Total Hours: <strong id="totalHours">0</strong> | 
+                            Regular: <strong id="regularHours">0</strong> | 
+                            Overtime: <strong id="overtimeHours">0</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payroll Page -->
+            <div id="payroll" class="page">
+                <header class="page-header">
+                    <h2>Payroll Processing</h2>
+                    <div class="header-actions">
+                        <span class="pay-period-label">
+                            <i class="ri-calendar-line"></i>
+                            Period: March 1-15, 2026
+                        </span>
+                    </div>
+                </header>
+
+                <div class="payroll-steps">
+                    <!-- Step 1: Review -->
+                    <div class="card step-card active">
+                        <div class="step-header">
+                            <span class="step-number">1</span>
+                            <h3>Review & Verify</h3>
+                        </div>
+                        <div class="step-content">
+                            <p>Review employee data and timesheet entries before processing payroll.</p>
+                            <div class="review-checklist">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="check1">
+                                    <span>All timesheets are complete</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="check2">
+                                    <span>Employee information is up to date</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="check3">
+                                    <span>Leave records are verified</span>
+                                </label>
+                            </div>
+                            <button class="btn btn-primary" onclick="nextPayrollStep()">
+                                <span>Continue to Calculate</span>
+                                <i class="ri-arrow-right-line"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Calculate -->
+                    <div class="card step-card">
+                        <div class="step-header">
+                            <span class="step-number">2</span>
+                            <h3>Calculate Payroll</h3>
+                        </div>
+                        <div class="step-content">
+                            <div id="calculationResults"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Finalize -->
+                    <div class="card step-card">
+                        <div class="step-header">
+                            <span class="step-number">3</span>
+                            <h3>Finalize & Distribute</h3>
+                        </div>
+                        <div class="step-content">
+                            <div id="finalizeResults"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Page -->
+            <div id="reports" class="page">
+                <header class="page-header">
+                    <h2>Reports & Analytics</h2>
+                    <div class="header-actions">
+                        <select class="period-select">
+                            <option>March 2026</option>
+                            <option>February 2026</option>
+                            <option>January 2026</option>
+                        </select>
+                    </div>
+                </header>
+
+                <div class="reports-grid">
+                    <div class="report-card" onclick="generateReport('payroll-summary')">
+                        <i class="ri-file-text-line" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Payroll Summary</h3>
+                        <p>Complete breakdown of salaries, deductions, and net pay for the period</p>
+                        <button class="btn btn-primary btn-sm">Generate Report</button>
+                    </div>
+
+                    <div class="report-card" onclick="generateReport('bir-compliance')">
+                        <i class="ri-government-line" style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;"></i>
+                        <h3>BIR Compliance</h3>
+                        <p>Tax withholding reports ready for BIR submission</p>
+                        <button class="btn btn-success btn-sm">Generate Report</button>
+                    </div>
+
+                    <div class="report-card" onclick="generateReport('contributions')">
+                        <i class="ri-shield-check-line" style="font-size: 3rem; color: var(--warning); margin-bottom: 1rem;"></i>
+                        <h3>Government Contributions</h3>
+                        <p>SSS, PhilHealth, and Pag-IBIG remittance reports</p>
+                        <button class="btn btn-secondary btn-sm">Generate Report</button>
+                    </div>
+
+                    <div class="report-card" onclick="generateReport('payslips')">
+                        <i class="ri-file-user-line" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h3>Payslips</h3>
+                        <p>Individual employee payslips for printing or email</p>
+                        <button class="btn btn-primary btn-sm">Generate Payslips</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settings" class="page">
+                <header class="page-header">
+                    <h2>System Settings</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="exportSettings()">
+                            <i class="ri-download-2-line"></i>
+                            <span>Export Config</span>
+                        </button>
+                        <button class="btn btn-primary" onclick="saveAllSettings()">
+                            <i class="ri-save-line"></i>
+                            <span>Save All Changes</span>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="settings-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="ri-building-line"></i> Company Information</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="settings-form">
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input type="text" class="form-input" id="companyName" value="Demo Company Inc.">
+                                </div>
+                                <div class="form-group">
+                                    <label>Business Address</label>
+                                    <textarea class="form-input" rows="3" id="companyAddress">123 Business Center, Makati City, Metro Manila</textarea>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>TIN Number</label>
+                                        <input type="text" class="form-input" id="companyTIN" placeholder="XXX-XXX-XXX-XXX">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>SSS Number</label>
+                                        <input type="text" class="form-input" id="companySSSNumber" placeholder="XX-XXXXXXX-X">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="ri-settings-3-line"></i> Payroll Configuration</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="settings-form">
+                                <div class="form-group">
+                                    <label>Pay Frequency</label>
+                                    <select class="form-input" id="payFrequency">
+                                        <option value="semi-monthly">Semi-Monthly (15th & 30th)</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="bi-weekly">Bi-Weekly</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Overtime Rate Multiplier</label>
+                                        <input type="number" class="form-input" id="overtimeRate" value="1.25" step="0.01" min="1.25">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Holiday Rate Multiplier</label>
+                                        <input type="number" class="form-input" id="holidayRate" value="2.00" step="0.01" min="2.00">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Currency Display</label>
+                                    <select class="form-input" id="currencyDisplay">
+                                        <option value="PHP">Philippine Peso (₱)</option>
+                                        <option value="USD">US Dollar ($)</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Employee Modal -->
+    <div id="addEmployeeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Employee</h3>
+                <button class="modal-close" onclick="closeAddEmployeeModal()">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <form id="addEmployeeForm" class="modal-body">
+                <div class="form-section">
+                    <h4 class="form-section-title">Basic Information</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Employee ID</label>
+                            <input type="text" name="employeeId" class="form-input" required placeholder="EMP-001">
+                        </div>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" name="fullName" class="form-input" required placeholder="Juan Dela Cruz">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Position</label>
+                            <input type="text" name="position" class="form-input" required placeholder="Sales Associate">
+                        </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select name="department" class="form-input" required>
+                                <option value="">Select Department</option>
+                                <option>Sales</option>
+                                <option>Operations</option>
+                                <option>Admin</option>
+                                <option>IT</option>
+                                <option>HR</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4 class="form-section-title">Compensation</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Monthly Salary (₱)</label>
+                            <input type="number" name="salary" class="form-input" required min="0" step="0.01" placeholder="25000.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Employment Type</label>
+                            <select name="employmentType" class="form-input" required>
+                                <option value="">Select Type</option>
+                                <option>Regular</option>
+                                <option>Probationary</option>
+                                <option>Contractual</option>
+                                <option>Part-Time</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4 class="form-section-title">Government IDs</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>SSS Number</label>
+                            <input type="text" name="sssNumber" class="form-input" placeholder="XX-XXXXXXX-X">
+                        </div>
+                        <div class="form-group">
+                            <label>PhilHealth Number</label>
+                            <input type="text" name="philhealthNumber" class="form-input" placeholder="XX-XXXXXXXXX-X">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Pag-IBIG Number</label>
+                            <input type="text" name="pagibigNumber" class="form-input" placeholder="XXXXXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>TIN</label>
+                            <input type="text" name="tin" class="form-input" placeholder="XXX-XXX-XXX-XXX">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeAddEmployeeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEmployee()">
+                    <i class="ri-save-line"></i>
+                    <span>Save Employee</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    
+    <style>
+        /* Additional Inline Styles */
+        .employee-filters {
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .search-wrapper {
+            position: relative;
+            flex: 1;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        
+        .search-input {
+            padding-left: 3rem;
+        }
+        
+        .filter-select {
+            padding: 0.875rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: var(--bg-primary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-select:hover {
+            border-color: var(--primary);
+        }
+        
+        .period-select {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-lg);
+            background: var(--bg-primary);
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .pay-period-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .review-checklist {
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .form-section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .form-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .timesheet-summary {
+            font-size: 0.925rem;
+            color: var(--text-secondary);
+        }
+        
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* Dark Mode Toggle */
+        body.dark-mode .btn-secondary i.ri-moon-line::before {
+            content: "\f1c8"; /* sun icon */
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "payrollph-system",
+  "version": "2.0.0",
+  "description": "Modern Philippine Payroll System with full compliance",
+  "author": "Gene Carlo Gallardo",
+  "license": "MIT",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "dev": "python3 -m http.server 8080"
+  },
+  "keywords": [
+    "payroll",
+    "philippines",
+    "sss",
+    "philhealth",
+    "pagibig",
+    "bir",
+    "hr",
+    "saas"
+  ]
+}
