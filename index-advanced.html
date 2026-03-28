@@ -17,8 +17,82 @@
     <!-- Advanced Styles -->
     <link rel="stylesheet" href="styles-advanced.css">
     
-    <!-- Dark Theme Overrides -->
-    <link rel="stylesheet" href="dark-theme-overrides.css">
+    <!-- Embedded Dark Theme (bypasses CSS serving issues) -->
+    <style>
+    /* Dark Theme Overrides for PayrollPH Enterprise */
+    :root {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --bg-card: #141414;
+        --bg-hover: #2a2a2a;
+        --border-color: #2a2a2a;
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+    }
+    body {
+        background: var(--bg-primary) !important;
+        color: var(--text-primary) !important;
+    }
+    .sidebar.advanced {
+        background: var(--bg-secondary) !important;
+        border-right-color: var(--border-color) !important;
+    }
+    .sidebar-header {
+        border-bottom-color: var(--border-color) !important;
+    }
+    .top-nav {
+        background: #151515 !important;
+        border-bottom: 1px solid var(--border-color) !important;
+    }
+    .dashboard-card, .stat-card, .card {
+        background: var(--bg-card) !important;
+        border-color: var(--border-color) !important;
+    }
+    .data-table {
+        background: var(--bg-card) !important;
+    }
+    .data-table th {
+        background: var(--bg-secondary) !important;
+        border-color: var(--border-color) !important;
+    }
+    .data-table td {
+        border-color: var(--border-color) !important;
+    }
+    .dropdown-menu {
+        background: var(--bg-secondary) !important;
+        border-color: var(--border-color) !important;
+    }
+    input, select, textarea {
+        background: var(--bg-secondary) !important;
+        border-color: var(--border-color) !important;
+        color: var(--text-primary) !important;
+    }
+    .btn-secondary {
+        background: var(--bg-secondary) !important;
+        border-color: var(--border-color) !important;
+        color: var(--text-primary) !important;
+    }
+    .global-search {
+        background: var(--bg-secondary) !important;
+        border-color: var(--border-color) !important;
+    }
+    .global-search input {
+        background: transparent !important;
+        color: var(--text-primary) !important;
+    }
+    .notifications-menu {
+        background: var(--bg-secondary) !important;
+    }
+    .notification-item {
+        border-bottom-color: var(--border-color) !important;
+    }
+    .stat-item {
+        background: var(--bg-card) !important;
+    }
+    .text-muted {
+        color: var(--text-secondary) !important;
+    }
+    </style>
 </head>
 <body>
     <div class="app-wrapper">
